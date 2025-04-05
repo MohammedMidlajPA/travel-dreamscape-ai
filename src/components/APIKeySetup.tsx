@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { saveGeminiApiKey, saveWeatherApiKey } from '@/services/apiKeyService';
+import { setGeminiApiKey, setWeatherApiKey } from '@/services/apiKeyService';
 import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
 
@@ -13,8 +13,8 @@ interface APIKeySetupProps {
 }
 
 const APIKeySetup = ({ onComplete }: APIKeySetupProps) => {
-  const [geminiApiKey, setGeminiApiKey] = useState('');
-  const [weatherApiKey, setWeatherApiKey] = useState('');
+  const [geminiApiKey, setGeminiApiKeyState] = useState('');
+  const [weatherApiKey, setWeatherApiKeyState] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
@@ -34,8 +34,8 @@ const APIKeySetup = ({ onComplete }: APIKeySetupProps) => {
 
     // Simulate validation
     setTimeout(() => {
-      saveGeminiApiKey(geminiApiKey);
-      saveWeatherApiKey(weatherApiKey);
+      setGeminiApiKey(geminiApiKey);
+      setWeatherApiKey(weatherApiKey);
       
       toast({
         title: "API Keys Saved",
@@ -68,7 +68,7 @@ const APIKeySetup = ({ onComplete }: APIKeySetupProps) => {
                 type="password" 
                 placeholder="Enter your Gemini Flash 2 API key" 
                 value={geminiApiKey}
-                onChange={(e) => setGeminiApiKey(e.target.value)}
+                onChange={(e) => setGeminiApiKeyState(e.target.value)}
               />
               <p className="text-xs text-muted-foreground">
                 Get your Gemini API key from <a href="https://ai.google.dev/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Google AI Studio</a>
@@ -82,7 +82,7 @@ const APIKeySetup = ({ onComplete }: APIKeySetupProps) => {
                 type="password" 
                 placeholder="Enter your OpenWeatherMap API key" 
                 value={weatherApiKey}
-                onChange={(e) => setWeatherApiKey(e.target.value)}
+                onChange={(e) => setWeatherApiKeyState(e.target.value)}
               />
               <p className="text-xs text-muted-foreground">
                 Get your OpenWeatherMap API key from <a href="https://openweathermap.org/api" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">OpenWeatherMap</a>
