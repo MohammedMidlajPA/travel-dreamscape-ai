@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button, ButtonProps } from '@/components/ui/button';
-import { motion } from 'framer-motion';
+import { motion, TargetAndTransition } from 'framer-motion';
 
 // Create a motion div that forwards any custom Button props
 const MotionButton = motion(React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
@@ -9,9 +9,9 @@ const MotionButton = motion(React.forwardRef<HTMLButtonElement, ButtonProps>((pr
 }));
 
 interface AnimatedButtonProps extends ButtonProps {
-  whileHover?: object;
-  whileTap?: object;
-  transition?: object;
+  whileHover?: TargetAndTransition;
+  whileTap?: TargetAndTransition;
+  transition?: any;
   children: React.ReactNode;
 }
 
